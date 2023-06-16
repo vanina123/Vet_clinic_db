@@ -56,3 +56,28 @@ CREATE TABLE animals (
     CONSTRAINT fk_species FOREIGN KEY(species_id) REFERENCES species(id),
     CONSTRAINT fk_owners FOREIGN KEY(owners_id) REFERENCES owners(id)
 );
+
+-- day 4
+CREATE TABLE vets (
+    id serial PRIMARY KEY,
+    name VARCHAR not null,
+    age int,
+    date_of_graduaction DATE
+);
+
+
+CREATE TABLE specializations (
+    vets_id int,
+    species_id int,
+    CONSTRAINT fk_vets FOREIGN KEY(vets_id) REFERENCES vets(id),
+    CONSTRAINT fk_species FOREIGN KEY(species_id) REFERENCES species(id),
+    PRIMARY KEY(vets_id, species_id)
+);
+CREATE TABLE visits (
+    vets_id int,
+    animals_id int,
+    visit_date date,
+    CONSTRAINT fk_vets FOREIGN KEY(vets_id) REFERENCES vets(id),
+    CONSTRAINT fk_animals FOREIGN KEY(animals_id) REFERENCES animals(id),
+    PRIMARY KEY(vets_id, animals_id, visit_date)
+);
