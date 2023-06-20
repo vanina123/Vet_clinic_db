@@ -81,3 +81,17 @@ CREATE TABLE visits (
     CONSTRAINT fk_animals FOREIGN KEY(animals_id) REFERENCES animals(id),
     PRIMARY KEY(vets_id, animals_id, visit_date)
 );
+
+-- Add an email column to your owners table
+ALTER TABLE owners ADD COLUMN email VARCHAR(120);
+
+-- Execution time improvement
+
+-- crete index for visits (animal_id)
+CREATE INDEX visits_animal_id_idx ON visits (animal_id);
+
+-- crete index for visits (vet_id)
+CREATE INDEX visits_vet_id_idx ON visits (vet_id);
+
+-- crete index for owners (email column)
+CREATE INDEX owners_email_idx ON owners (email);
